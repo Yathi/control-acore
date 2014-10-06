@@ -432,8 +432,14 @@ div.callout {
             for (var i = nameList.length - 1; i >= 0; i--) {
                 $('#chat_' + nameList[i]).text('');
                 $('#chat_' + nameList[i]).removeClass("callout");
+            };
+        }
+
+        function removeAnimate (nameList) {
+            for (var i = nameList.length - 1; i >= 0; i--) {
                 $('#npcParent' + i).removeClass('passAnimate');
             };
+            
         }
 
         // issue here is when is initializeNPCs called, and when are they initialized in the views.py. make sure you dont have to 
@@ -521,6 +527,7 @@ div.callout {
                     } else if (gameStatus == 'final'){
                         finalUpdate(npcCount);
                         clearCallouts(nameList);
+                        removeAnimate(nameList);
                     } else {
                         document.getElementById('nextStep').disabled = false;
                     }
@@ -540,6 +547,7 @@ div.callout {
                                 $('#chat_' + nameList[i]).addClass("callout");
                             } else {
                                 $('#chat_' + nameList[i]).text('');
+                                $('#chat_' + nameList[i]).removeClass("callout");
                             }
                             if(actionList[i] == 'Pass'){
                                 $('#npcParent' + i).addClass("passAnimate");
@@ -586,7 +594,9 @@ div.callout {
                 $('#npcParent'+ passingIndex).attr('id', 'npcParent'+ (passingIndex + 1));                                
                 $('#ptemp').attr('id', 'npcParent' + passingIndex);
 
-                $('#chat_' + nameList[passingIndex]).text(getPassedText())
+                $('#chat_' + nameList[passingIndex]).text(getPassedText());
+                $('#chat_' + nameList[passingIndex]).addClass("callout");
+                removeAnimate(nameList);
 
             }
             if(passingNPCs.length == 0){
