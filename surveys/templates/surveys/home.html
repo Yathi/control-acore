@@ -6,19 +6,8 @@
 {% block title %}ACORE{% endblock title %}
 
 {% block page_content %} 
-    <div style='height:4em; width:100%; margin-left:15px; margin-right:15px;  margin-bottom: 1cm; background-color:#eee;'>
-        <span id='status1' class='game-status'>
-            <h4 class='status-text'> Passive Phase </h4> 
-        </span>
-        <span id='status2' class='game-status'>
-            <h4 class='status-text'> Planning Phase </h4> 
-        </span>
-        <span id='status3' class='game-status'>
-            <h4 class='status-text'> Protesting Phase </h4> 
-        </span>
-        <span id='status4' class='game-status'>
-            <h4 class='status-text'> Passing Phase </h4> 
-        </span>
+    <div style='height:1em; width:100%; margin-left:15px; margin-right:15px;  margin-bottom: 1cm; '>
+
     </div>
 
     <div class='col-sm-12' id='npcDiv' style='position:relative;'>
@@ -381,22 +370,6 @@ div.callout {
             } 
         }
 
-        function highlightGameStatus(gameStatus){
-            if(gameStatus == 'initial'){
-                $('#status1').attr('class', 'game-status nonactive-status');
-                $('#status2').attr('class', 'game-status active-status');
-            }else if (gameStatus == 'protest?'){
-                $('#status2').attr('class', 'game-status nonactive-status');
-                $('#status3').attr('class', 'game-status active-status');
-            }else if (gameStatus == 'penultimate'){
-                $('#status3').attr('class', 'game-status nonactive-status');
-                $('#status4').attr('class', 'game-status active-status');
-            }else{
-                $('#status4').attr('class', 'game-status nonactive-status');
-                $('#status1').attr('class', 'game-status active-status');
-            }
-        }
-
         function infoPopup(){
             var width = window.innerWidth;
             var height = window.innerHeight;
@@ -461,7 +434,6 @@ div.callout {
                 var passingNPCs = npcData["passing_list"];
 
                 //$('#gameStatus').html(getGameStatusTitle(gameStatus));
-                highlightGameStatus(gameStatus);
                 document.getElementById('nextStep').disabled = false;
 
                 for(var i = 0; i < npcCount; i++){
@@ -558,7 +530,6 @@ div.callout {
                     }
 
                     //$('#gameStatus').html(getGameStatusTitle(gameStatus));
-                    highlightGameStatus(gameStatus);
             }
             xmlhttp.send();
         }
