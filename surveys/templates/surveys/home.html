@@ -12,11 +12,11 @@
 
     <div class='col-sm-12' id='npcDiv' style='position:relative;'>
         <div >
-            <button id="nextStep" class="btn btn-success" style='margin-left:0px; width:100px;' type="button" > Next Step </button>
+            <button id="startButton" class="btn btn-success" style='margin-left:0px; width:100px;' type="button" > Start </button>
             <button id="info" class="btn btn-warning " type="button" > i </button>
         </div>
 
-        <div style='width:160px; height:150px; float:left'>
+        <div style='width:200px; height:170px; float:left'>
             <img src='{% static "surveys/OculusRift.jpg" %}' style='width:100%; height:auto; margin-top:100px'/>
         </div>
 
@@ -32,13 +32,7 @@
                 <div class='page-header'> </div>
             </div>
         </div>
-
-        
-
     </div>
-
-
-    
 {% endblock page_content %}
 
 
@@ -50,171 +44,6 @@
     * { 
         font-family: Helvetica, Arial;
     }
-
-    dt { 
-        float: left; 
-        padding: 4px; 
-    }
-
-    .npcHolder{
-        /*TODO change these dimensions to proportions, such that different screen sizes and images can be used*/
-        float:left;
-        width:150px;
-        height:360px;
-        margin-right:20px;
-        position:relative;
-    }
-
-    .npcImage{
-        width:100%;
-        height:auto;
-    }
-
-    .scoreboard-color-legend{         
-        border-radius:50%; 
-        border-style:solid; 
-        height:1em; 
-        width:1em; 
-        float:left;
-    }
-
-    .graph_bar {
-        margin-bottom: 10px;
-        color: #fff;
-        text-align: center;
-        border-radius: 2px;
-        height: 30px;
-    }
-
-    .neutral_bar{
-        background: -webkit-gradient(linear, left top, left bottom, from(#afafd3), to(#d4d4d4));
-    }
-
-    .hope_bar {
-        background: -webkit-gradient(linear, left top, left bottom, from(#2b669a), to(#4098e6));
-    }
-    .joy_bar {
-        background: -webkit-gradient(linear, left top, left bottom, from(#3b8f3b), to(#5edf5e));
-    }
-    .fear_bar {
-        background: -webkit-gradient(linear, left top, left bottom, from(#965d0c), to(#e38d13));
-    }
-    .sorrow_bar { 
-        background: -webkit-gradient(linear, left top, left bottom, from(#b92c28), to(#6e1b18));
-    }
-
-    .pass-fail-alert {
-        background-color:#ccc;
-        border-radius:4px;
-        border-width:1px;
-        border-style:solid;
-        border-color:#aaa;
-        display:block;
-        font-family: Helvetica, Arial;
-        margin:0;
-        padding:15px;
-        text-align:center;
-    }
-
-    .game-status{
-        width:25%;
-        height:100%;
-        float:left;
-    }
-
-    .active-status{
-        background-color:#888;
-        border-color:#888;
-        border-style:solid;
-        border-radius:5px;
-    }
-
-    .nonactive-status{
-        background-color:#eee;
-    }
-
-    .status-text{
-        color:#ffffff; 
-        text-align:center;
-        padding-left:0px; 
-        padding-right:0px;
-        padding-top:0.25cm;
-        font-family:Helvetica, Arial;
-    }
-
-    .info-button{
-        margin-left:1em; 
-    }
-
-    .one-line{
-        white-space:nowrap;
-    }
-
-/*    .chatbox {
-        margin-top: 10px;
-        border: 1px solid green;
-        border-radius: 10px;
-        height: 20px;
-        text-align: center;
-    }*/
-
-
-    div.calloutFrame {
-    height: 130px;
-    width: 140px;
-    float: left;
-}
-
-div.callout {
-    background-color: #444;
-    background-image: -moz-linear-gradient(top, #444, #444);
-    position: relative;
-    color: #ccc;
-    padding: 10px;
-    border-radius: 3px;
-    box-shadow: 0px 0px 20px #999;
-    margin: 25px;
-    min-height: 50px;
-    border: 1px solid #333;
-    text-shadow: 0 0 1px #000;
-    height: 80px;
-    
-    /*box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset;*/
-}
-
-.callout::before {
-    content: "";
-    width: 0px;
-    height: 0px;
-    border: 0.8em solid transparent;
-    position: absolute;
-}
-
-
-
-.callout.top::before {
-    left: 45%;
-    bottom: -20px;
-    border-top: 10px solid #444;
-}
-.passAnimate {
-    -webkit-animation-duration: 1s;
-    -webkit-animation-name: slidein;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-direction: alternate;
-
-}
-@-webkit-keyframes slidein {
-  from {
-    margin-bottom: -30px;
-    margin-right: 10px;
-  }
-
-  to {
-    margin-bottom: 50px;
-    margin-right: 30px;
-  }
-}
 
 
 </style>
@@ -373,7 +202,6 @@ div.callout {
         function infoPopup(){
             var width = window.innerWidth;
             var height = window.innerHeight;
-            // newWindow = window.open('surveys/infoPopup', "ACORE Eplanation", "toolbar=no, scrollbars=no, resizable=yes, top=" + (height*.125) + ", left=" + (width * 0.125) + ", width=" + (width*0.75) +", height=" + (height * 0.75));
             newWindow = window.open('surveys/infoPopup', "ACORE Eplanation", "toolbar=no, scrollbars=no, resizable=yes, top=" + (height*.125) + ", left=" + (width * 0.125) + ", width=" + (width*0.75) +", height=" + (height * 0.75));
 
             if (window.focus) {
@@ -392,7 +220,7 @@ div.callout {
             }
             xmlhttp.send();
             document.getElementById('info').disabled = false;
-            document.getElementById('nextStep').disabled = false;
+            document.getElementById('startButton').disabled = false;
             $('#referenceDiv').css('opacity', '1');
 
             var newGameDiv = document.getElementById('newGameDiv');
@@ -423,7 +251,7 @@ div.callout {
             Creates a div hirearcy for each NPC such that the elements can be modified and adapted as they move through the line.
             If the game is over, it will create a button to restart the game. */
             var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("GET", "surveys/initialize", true);
+            xmlhttp.open("GET", "initialize", true);
             xmlhttp.onload=function(){
                 var npcData = JSON.parse(xmlhttp.response);
                 var npcCount = npcData["npc_count"];
@@ -434,7 +262,7 @@ div.callout {
                 var passingNPCs = npcData["passing_list"];
 
                 //$('#gameStatus').html(getGameStatusTitle(gameStatus));
-                document.getElementById('nextStep').disabled = false;
+                document.getElementById('startButton').disabled = false;
 
                 for(var i = 0; i < npcCount; i++){
                     $("<div id='npcParent" + (i+1) + "' class='npc-container npcHolder'> </div>").appendTo("#npcDiv");
@@ -464,7 +292,7 @@ div.callout {
             
 
             var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("GET", "surveys/reinitialize", true);
+            xmlhttp.open("GET", "reinitialize", true); //surveys/reinitialize --> reinitialize
             xmlhttp.onload=function(){
                 var npcData = JSON.parse(xmlhttp.response);
                 var npcCount = npcData["lineLength"];
@@ -476,14 +304,14 @@ div.callout {
             initializeNPCs();
         }
 
-        function updateNPCs(){
+        function updateNPCs(runIntervalID){
             /* Called everytime the nextStep button is pressed, which represents the change in the game state
             in the model. All of the npc information that needs to be changed in the UI is fetched from a JSON call.
             The next step button is disabled such that the user cannot ruin the animations by spamming the button.
             The changes made in the specific steps are in their respective functions as a matter of organization. */
-            document.getElementById('nextStep').disabled = true; 
+            //document.getElementById('startButton').disabled = true; 
             var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("GET", "surveys/ajax", true);
+            xmlhttp.open("GET", "ajax", true);   //surveys/ajax --> ajax
             xmlhttp.onload=function(){
                     var npcData = JSON.parse(xmlhttp.response);
 
@@ -497,11 +325,11 @@ div.callout {
                     if(gameStatus == 'penultimate'){
                         penultimateUpdate(passingNPCs, nameList);
                     } else if (gameStatus == 'final'){
-                        finalUpdate(npcCount);
+                        finalUpdate(npcCount, runIntervalID);
                         clearCallouts(nameList);
                         removeAnimate(nameList);
                     } else {
-                        document.getElementById('nextStep').disabled = false;
+                        document.getElementById('startButton').disabled = false;
                     }
 
                     if (gameStatus == 'final'){
@@ -554,7 +382,7 @@ div.callout {
                     movingLeft.animate({left: -rightWidth}, 750),
                     movingRight.animate({left: leftWidth}, 750)).then(
                 function(){
-                    document.getElementById('nextStep').disabled = false;
+                    document.getElementById('startButton').disabled = false;
                     movingLeft.insertBefore(movingRight);
                     movingLeft.css('left', 0);
                     movingRight.css('left', 0);
@@ -571,11 +399,11 @@ div.callout {
 
             }
             if(passingNPCs.length == 0){
-                document.getElementById('nextStep').disabled = false;
+                document.getElementById('startButton').disabled = false;
             }
         }
 
-        function finalUpdate(npcCount){
+        function finalUpdate(npcCount, runIntervalID){
             /* When it's time for the NPC in first place to receive their item, they are no longer included in the list of
             npcs, so they are removed from the layout by a fade out, and all of the NPCs underneath are moved upward to 
             take the higher positions.  In the case that the line is now empty, the game over text and button will appear so that
@@ -592,16 +420,16 @@ div.callout {
 
                 for(var i = 2; i <=npcCount + 1; i++){
                     $('#npcParent' + i).attr('id', 'npcParent' + (i-1));
-                    document.getElementById('nextStep').disabled = false;
+                    document.getElementById('startButton').disabled = false;
                 }
             });
             if(npcCount == 0){
-                setUpEndGame();
+                setUpEndGame(runIntervalID);
             }
         }
 
-        function setUpEndGame(){
-            document.getElementById('nextStep').disabled = true; // Prevents the user from changing the game state when the game is over
+        function setUpEndGame(runIntervalID){
+            clearInterval(runIntervalID);
 
             // $("<div style='text-align:center' id='endGameDiv'></div>").appendTo("#npcDiv");
             // $("<h1 style='text-align:center'> Game Over! </h1>").appendTo("#endGameDiv");
@@ -614,8 +442,12 @@ div.callout {
         }
 
         $('document').ready(function(){
-            $('#nextStep').click(function(){
-                updateNPCs();
+            $('#startButton').click(function(){
+                document.getElementById('startButton').disabled = true; // Prevents the user from changing the game state 
+                var runIntervalID = window.setInterval(function(){
+                    updateNPCs(runIntervalID);
+                }, 1000);  //5 second delay
+                
             });
             $('#info').click(function(){
                 infoPopup();
