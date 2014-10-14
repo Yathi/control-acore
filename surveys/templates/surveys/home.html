@@ -220,7 +220,6 @@
             }
             xmlhttp.send();
             document.getElementById('info').disabled = false;
-            document.getElementById('startButton').disabled = false;
             $('#referenceDiv').css('opacity', '1');
 
             var newGameDiv = document.getElementById('newGameDiv');
@@ -262,7 +261,6 @@
                 var passingNPCs = npcData["passing_list"];
 
                 //$('#gameStatus').html(getGameStatusTitle(gameStatus));
-                document.getElementById('startButton').disabled = false;
 
                 for(var i = 0; i < npcCount; i++){
                     $("<div id='npcParent" + (i+1) + "' class='npc-container npcHolder'> </div>").appendTo("#npcDiv");
@@ -328,9 +326,7 @@
                         finalUpdate(npcCount, runIntervalID);
                         clearCallouts(nameList);
                         removeAnimate(nameList);
-                    } else {
-                        document.getElementById('startButton').disabled = false;
-                    }
+                    } 
 
                     if (gameStatus == 'final'){
                         $('#chat_' + nameList[0]).text('Can I get an Oculus Rift please?')
@@ -382,7 +378,6 @@
                     movingLeft.animate({left: -rightWidth}, 750),
                     movingRight.animate({left: leftWidth}, 750)).then(
                 function(){
-                    document.getElementById('startButton').disabled = false;
                     movingLeft.insertBefore(movingRight);
                     movingLeft.css('left', 0);
                     movingRight.css('left', 0);
@@ -397,9 +392,6 @@
                 $('#chat_' + nameList[passingIndex]).addClass("callout");
                 removeAnimate(nameList);
 
-            }
-            if(passingNPCs.length == 0){
-                document.getElementById('startButton').disabled = false;
             }
         }
 
@@ -420,7 +412,6 @@
 
                 for(var i = 2; i <=npcCount + 1; i++){
                     $('#npcParent' + i).attr('id', 'npcParent' + (i-1));
-                    document.getElementById('startButton').disabled = false;
                 }
             });
             if(npcCount == 0){
@@ -430,14 +421,6 @@
 
         function setUpEndGame(runIntervalID){
             clearInterval(runIntervalID);
-
-            // $("<div style='text-align:center' id='endGameDiv'></div>").appendTo("#npcDiv");
-            // $("<h1 style='text-align:center'> Game Over! </h1>").appendTo("#endGameDiv");
-            // $("<div style='text-align:center'><button id='playAgain' class='btn btn-danger' type='button'> Play Again? </button></div> ").appendTo("#endGameDiv");
-
-            // $("<div class='page-header'></div>").appendTo("#endGameDiv");
-            // $("<h1 style='text-align:center'> Ready for the survey? </h1>").appendTo("#endGameDiv");
-            // $("<div style='text-align:center'> <a href='surveys/questions'> <button type='button' class='btn btn-primary' style='text-align:center'> Survey </button> </a> </div>").appendTo("#endGameDiv");
             $('#newGameDiv').css('display', 'inline');
         }
 
