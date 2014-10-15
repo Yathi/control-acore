@@ -13,11 +13,10 @@
     <div class='col-sm-12' id='npcDiv' style='position:relative;'>
         <div >
             <button id="startButton" class="btn btn-success" style='margin-left:0px; width:100px;' type="button" > Start </button>
-            <button id="info" class="btn btn-warning " type="button" > i </button>
         </div>
 
         <div style='width:200px; height:170px; float:left'>
-            <img src='{% static "surveys/OculusRift.jpg" %}' style='width:100%; height:auto; margin-top:100px'/>
+            <img src='{% static "surveys/OculusRift.jpg" %}' style='width:100%; height:auto; margin-top:150px'/>
         </div>
 
         <div id='newGameDiv' style='display:none;'>
@@ -239,7 +238,6 @@
             for (var i = nameList.length - 1; i >= 0; i--) {
                 $('#npcParent' + i).removeClass('passAnimate');
             };
-            
         }
 
         // issue here is when is initializeNPCs called, and when are they initialized in the views.py. make sure you dont have to 
@@ -259,8 +257,6 @@
                 var emotionList = npcData["emotions"];
                 var gameStatus = npcData["gameStatus"];
                 var passingNPCs = npcData["passing_list"];
-
-                //$('#gameStatus').html(getGameStatusTitle(gameStatus));
 
                 for(var i = 0; i < npcCount; i++){
                     $("<div id='npcParent" + (i+1) + "' class='npc-container npcHolder'> </div>").appendTo("#npcDiv");
@@ -307,7 +303,6 @@
             in the model. All of the npc information that needs to be changed in the UI is fetched from a JSON call.
             The next step button is disabled such that the user cannot ruin the animations by spamming the button.
             The changes made in the specific steps are in their respective functions as a matter of organization. */
-            //document.getElementById('startButton').disabled = true; 
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.open("GET", "ajax", true);   //surveys/ajax --> ajax
             xmlhttp.onload=function(){
@@ -347,14 +342,11 @@
                             }
                             if(actionList[i] == 'Pass'){
                                 $('#npcParent' + (i+1)).addClass("passAnimate");
-                               // $('#npcParent' + (i+1)).addClass("compensateAnimate");
                             }
                         }
                         console.log(emotionList[i][0])
                 
                     }
-
-                    //$('#gameStatus').html(getGameStatusTitle(gameStatus));
             }
             xmlhttp.send();
         }
@@ -365,7 +357,7 @@
             reactivated after the animation is finished to prevent overlapping animations. */
             for(var i=0; i < passingNPCs.length; i ++){
                 
-                var passingIndex = passingNPCs[i]
+                var passingIndex = passingNPCs[i];
 
                 var movingLeft = $('#npcParent' + (passingIndex + 1));
                 var movingRight = $('#npcParent' + passingIndex);
@@ -392,7 +384,6 @@
                 $('#chat_' + nameList[passingIndex]).text(getPassedText());
                 $('#chat_' + nameList[passingIndex]).addClass("callout");
                 removeAnimate(nameList);
-
             }
         }
 
@@ -430,7 +421,7 @@
                 document.getElementById('startButton').disabled = true; // Prevents the user from changing the game state 
                 var runIntervalID = window.setInterval(function(){
                     updateNPCs(runIntervalID);
-                }, 2000);  //5 second delay
+                }, 1500);  //1.5 second delay
                 
             });
             $('#info').click(function(){
