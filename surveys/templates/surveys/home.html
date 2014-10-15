@@ -346,7 +346,8 @@
                                 $('#chat_' + nameList[i]).removeClass("callout");
                             }
                             if(actionList[i] == 'Pass'){
-                                $('#npcParent' + i).addClass("passAnimate");
+                                $('#npcParent' + (i+1)).addClass("passAnimate");
+                               // $('#npcParent' + (i+1)).addClass("compensateAnimate");
                             }
                         }
                         console.log(emotionList[i][0])
@@ -429,7 +430,7 @@
                 document.getElementById('startButton').disabled = true; // Prevents the user from changing the game state 
                 var runIntervalID = window.setInterval(function(){
                     updateNPCs(runIntervalID);
-                }, 1000);  //5 second delay
+                }, 2000);  //5 second delay
                 
             });
             $('#info').click(function(){
