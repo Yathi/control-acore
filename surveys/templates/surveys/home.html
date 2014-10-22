@@ -20,16 +20,19 @@
         </div>
 
         <div id='newGameDiv' style='display:none;'>
-            <div class='col-sm-4'> 
-                <h2 style='text-align:center'> Game Over! </h2>
-                <div style='text-align:center'> <button class='btn btn-danger' id='playAgain' > Play Again </button> </div>
+            <div class='col-sm-8'> 
+                <h2 style='text-align:center'> Your next run of the same scenario will start in 5 seconds! </h2>
                 <div class='page-header'> </div>
             </div>
+        </div>
+
+        <div id="surveyDiv" style='display:none;'>
             <div class='col-sm-4'>
                 <h2 style='text-align:center'> Ready for the survey? </h2>
                 <div style='text-align:center'> <a href='/surveys/questions'> <button class='btn btn-primary'> Survey </button> </a></div>
                 <div class='page-header'> </div>
             </div>
+            
         </div>
     </div>
 {% endblock page_content %}
@@ -414,6 +417,10 @@
         function setUpEndGame(runIntervalID){
             clearInterval(runIntervalID);
             $('#newGameDiv').css('display', 'inline');
+            setTimeout(function(){
+                reinitializeNPCs();
+                document.getElementById('startButton').disabled = false;
+            }, 5000);
         }
 
         $('document').ready(function(){
