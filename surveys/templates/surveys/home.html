@@ -345,6 +345,14 @@
                             }
                         }
                         console.log(emotionList[i][0])
+                         $('#joytext_' + nameList[i]).text('Joy ' + getEmotionPercent(emotionList[i][0]) + '%');
+                         $('#joybar_'+nameList[i]).width(getEmotionPercent(emotionList[i][0]) + '%');
+                         $('#hopetext_' + nameList[i]).text('Hope ' + getEmotionPercent(emotionList[i][1]) + '%');
+                         $('#hopebar_'+nameList[i]).width(getEmotionPercent(emotionList[i][1]) +'%');
+                         $('#sorrowtext_' + nameList[i]).text('Sorrow ' + getEmotionPercent(emotionList[i][2]) + '%');
+                         $('#sorrowbar_'+nameList[i]).width(getEmotionPercent(emotionList[i][2]) + '%');
+                         $('#feartext_' + nameList[i]).text('Fear ' + getEmotionPercent(emotionList[i][3]) + '%');
+                         $('#fearbar_'+nameList[i]).width(getEmotionPercent(emotionList[i][3]) + '%');  
                 
                     }
             }
