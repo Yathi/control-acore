@@ -6,17 +6,18 @@
 {% block title %}ACORE{% endblock title %}
 
 {% block page_content %} 
-    <div style='height:1em; width:100%; margin-left:15px; margin-right:15px;  margin-bottom: 1cm; '>
+    <div style='height:0.5em; width:100%; margin-left:15px; margin-right:15px;  margin-bottom: 1cm; '>
 
     </div>
 
     <div class='col-sm-12' id='npcDiv' style='position:relative;'>
+        <h3 style='text-align:center; margin-top: 0;'> Scenario A </h3>
         <div >
             <button id="startButton" class="btn btn-success" style='margin-left:0px; width:100px;' type="button" > Start </button>
         </div>
 
-        <div style='width:200px; height:170px; float:left'>
-            <img src='{% static "surveys/OculusRift.jpg" %}' style='width:100%; height:auto; margin-top:150px'/>
+        <div id="logoDiv" style='width:200px; height:170px; float:left; margin-right: 10px;'>
+            <img src='{% static "surveys/Destiny.jpg" %}' style='width:100%; height:auto; margin-top:200px; border: 2px solid black; border-radius: 5px;'/>
         </div>
 
         <div id='newGameDiv' style='display:none;'>
@@ -27,10 +28,8 @@
         </div>
 
         <div id="surveyDiv" style='display:none;'>
-            <div class='col-sm-4'>
-                <h2 style='text-align:center'> Ready for the survey? </h2>
-                <div style='text-align:center'> <a href='/surveys/questions'> <button class='btn btn-primary'> Survey </button> </a></div>
-                <div class='page-header'> </div>
+            <div class='col-sm-4 col-sm-offset-2'>
+                <iframe src="https://docs.google.com/forms/d/1u45bdpV5petVDmPkIQNfZkR9vCEF-m2TUsmIiAf3mGk/viewform?embedded=true" width="860" height="1000" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
             </div>
             
         </div>
@@ -53,6 +52,10 @@
 
 {% block js %}
     <script>
+        //GLOBAL VARIABLE//
+        var repeat = true; //Set true initially so that we get the repeat run
+
+
 
         // Returns a random integer between min (included) and max (excluded)
         // Using Math.round() will give you a non-uniform distribution!
@@ -76,13 +79,13 @@
 
         function getProtestText(){
             var protests = ['Stop!', 'Where are you going?', 'You shall not pass!'];
-            counter = getRandomInt(0,protests.length -1);
+            counter = getRandomInt(0,protests.length);
             return protests[counter];
         }
 
         function getPassedText() {
             var passedText = ['Not fair!', 'I will get back at you'];
-            counter = getRandomInt(0,passedText.length -1);
+            counter = getRandomInt(0,passedText.length);
             return passedText[counter];
         }
 
@@ -110,8 +113,6 @@
 
             var x = 2;
             var y = 2;
-            //var deltaX = hopeEmo - fearEmo;
-            //var deltaY = joyEmo - sorrowEmo;
             if ((joyEmo + hopeEmo) > (sorrowEmo + fearEmo)) {
                 if (joyEmo > hopeEmo){
                 if (joyEmo > 0) {
@@ -158,8 +159,6 @@
             }
 
 
-          
-           // console.log("deltaX:" + deltaX + "deltaY" + deltaY);
             console.log("x: " + x + " y: " + y + "emTab[x,y]: " + emotionalTable[x][y]);
             return emotionalTable[x][y];
         }
@@ -273,10 +272,6 @@
                 }
                 $('#chat_' + nameList[0]).text('Can I get an Oculus Rift please?')
                 $('#chat_' + nameList[0]).addClass("callout");
-                if(npcCount == 0){
-                    setUpEndGame();                  
-                }
-                
             }
             xmlhttp.send();
         }
@@ -297,7 +292,7 @@
             xmlhttp.send();              
 
             $('#newGameDiv').css('display', 'none')
-            
+            repeat = false; //Setting it to false so that the function does not repeat again
             initializeNPCs();
         }
 
@@ -424,11 +419,19 @@
 
         function setUpEndGame(runIntervalID){
             clearInterval(runIntervalID);
-            $('#newGameDiv').css('display', 'inline');
-            setTimeout(function(){
+            if (repeat == true) {
+                $('#newGameDiv').css('display', 'inline');
+                setTimeout(function(){
                 reinitializeNPCs();
                 document.getElementById('startButton').disabled = false;
             }, 5000);
+            }
+            else {
+                //Have to load a new page
+                $('#logoDiv').css('display', 'none');
+                $('#startButton').css('display', 'none');
+                $('#surveyDiv').css('display', 'inline');
+            }
         }
 
         $('document').ready(function(){
